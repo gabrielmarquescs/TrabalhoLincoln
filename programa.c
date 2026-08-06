@@ -3,6 +3,14 @@
 #include <locale.h>
 #include <stdlib.h>
 
+void AparaString(*str){
+int i=0;
+
+
+
+}
+
+
 
 int main(){
     setlocale(LC_ALL,"Portuguese");
