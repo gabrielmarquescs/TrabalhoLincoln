@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
+#include <stdlib.h>
 
 
 int main(){
@@ -26,10 +27,14 @@ int main(){
         token=strtok(NULL,";\n");
     }
 
+    //int strcmp(str1,str2); compara as strings; 0 se igual
+
+
+
 
     for (int j=0;j<i;j++){
-        if ((j==2) || (j==23)){
-        printf("[Indice %d]: %s\n",j,coluna[j]);
+        if (j==2){
+        printf("ORGÃO: %s; ORÇAMENTO: %s\n",coluna[j],coluna[23]);
     }
     }
    }
