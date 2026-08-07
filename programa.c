@@ -1,107 +1,94 @@
 #include <stdio.h>
 #include <string.h>
-#include <locale.h>
+#include <locale.h>  // acentos
 #include <stdlib.h>
+#include <windows.h> // acentos
 
-void AparaString(char *str){
-    int tam = strlen(str);
+///////////////////////////////////////
+/*
+coluna[1]=ano da emenda
+coluna[4]=nome do parlamentar
+coluna[10]=estado que recebeu a emenda
+coluna[24]=valor pago
+*/
+///////////////////////////////////////
 
-    if (tam > 0 && str[tam-1] == '"'){
-        str[tam-1] = '\0';
-        tam--;
-    }
 
-    if (tam > 0 && str[0] == '"'){
-        int i;
-        for (i = 0; i < tam; i++){
-            str[i] = str[i+1];
+void maiorValor(const char *strValor, double *maior, int *lugarmaioreemenda, int linhaAtual) {
+    if (strValor == NULL || strValor[0] == '\0') return;
+
+    char aux[128];
+    int i = 0;
+
+
+    for (int k = 0; strValor[k] != '\0'; k++) {
+        if (strValor[k] == '"' || strValor[k] == ' ' || strValor[k] == '\r' || strValor[k] == '\n') {
+            continue;
         }
+        if (strValor[k] == ',') {
+            aux[i] = '.';
+            i++;
+        } else {
+            aux[i] = strValor[k];
+            i++;
+        }
+    }
+    aux[i] = '\0';
+
+    if (aux[0] == '\0') return;
+
+    double valorAtual = atof(aux);
+
+    if (valorAtual > *maior) {
+        *maior = valorAtual;
+        *lugarmaioreemenda = linhaAtual;
     }
 }
 
-double TrocarVirgula(char *str){
-    char copia[64];
-    strcpy(copia,str);
+int main() {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+    setlocale(LC_ALL, ".UTF-8");
 
-    for (int i=0;copia[i]!= '\0';i++){
-        if (copia[i]==','){
-            copia[i]='.';
-        }
-    }
-    return atof(copia);
-}
-
-
-
-
-int main(){
-    setlocale(LC_ALL,"Portuguese");
-    FILE *arquivo = fopen ("dados\\2025_OrcamentoDespesa.csv", "r");
-    if (arquivo == NULL){
-        printf("Erro ao abrir o programa");
+    FILE *arquivo = fopen("dados\\EmendasParlamentares.csv", "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo\n");
         return 1;
     }
 
     char linha[2048];
-    char *coluna[26];
-    char ministerio[128]="";
-    double somaMinisterio=0;
-    int primeiraLinha=1;
+    char *coluna[35];
+    double maioremenda = 0.0;
+    double emendaestado = 0.0;
+    int contemendaestado = 0;
+    int contparlemenda = 0;
+    int lugarmaioreemenda = 0;
+    int numeroLinha = 1;
 
 
+    fgets(linha, sizeof(linha), arquivo);
 
-    fgets(linha, sizeof(linha), arquivo);  //pula o cabeçalho tentar entender dps
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        numeroLinha++;
+        int i = 0;
 
+        char *token = strtok(linha, ";\r\n");
+        while (token != NULL && i < 35) {
+            coluna[i] = token;
+            i++;
+            token = strtok(NULL, ";\r\n");
+        }
 
-   while (fgets(linha, sizeof(linha), arquivo)!= NULL){
-    int i=0;
-    char *token = strtok(linha, ";\n");
-    while (token != NULL){
-        AparaString(token);
-        coluna[i]=token;
-        i++;
-        token=strtok(NULL,";\n");
+        // Se a coluna 24 (Valor Pago) existe na linha lida, avalia
+        if (i > 24) {
+            maiorValor(coluna[24], &maioremenda, &lugarmaioreemenda, numeroLinha);
+        }
     }
-
-    char *orgao = coluna[2];//aponta pra o nome do orgao
-    double valor = TrocarVirgula(coluna[23]);
-
-    if (primeiraLinha){
-        strcpy(ministerio,orgao);
-        somaMinisterio=valor;
-        primeiraLinha=0;
-    }
-    else if(strcmp(orgao,ministerio)==0){
-        somaMinisterio=somaMinisterio+valor;
-    }
-    else{
-        printf("ORGAO: %s; ORCAMENTO: %.2f\n", ministerio, somaMinisterio);
-        strcpy(ministerio,orgao);
-        somaMinisterio=valor;
-    }
-
-            if (strcpy)
-        if (!primeiraLinha){
-        printf("ORGAO: %s; ORCAMENTO: %.2f\n", ministerio, somaMinisterio);
-    }
-
-
-
-
-
-
-
-
-    //int strcmp(str1,str2); compara as strings; 0 se igual
-   /* for (int j=0;j<i;j++){
-        if (j==2){
-        printf("ORGÃO: %s; ORÇAMENTO: %.2f\n",coluna[j],atof(coluna[23]));
-    }
-    }*/
-   }
-
-
 
     fclose(arquivo);
-return 0;
+
+    printf("Maior valor pago em emenda: R$ %.2f\n", maioremenda);
+    printf("Linha no arquivo: %d\n", lugarmaioreemenda);
+
+    return 0;
 }
