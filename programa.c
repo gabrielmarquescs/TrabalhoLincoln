@@ -13,6 +13,12 @@ coluna[24]=valor pago
 */
 ///////////////////////////////////////
 
+//void rankingEstados(const char *estado); VAI COMPARAR A COLUNA COM A STRING DE CADA ESTADO, SE FOR IGUAL, CONTADOR++;DECLARAR
+//O CONTADOR DE CADA ESTADO; DEPOIS FAZER O IF PARA VER SE TA NA REGIAO X E SOMAR
+
+
+
+
 
 void maiorValor(const char *strValor, double *maior, int *lugarmaioreemenda, int linhaAtual) {
     if (strValor == NULL || strValor[0] == '\0') return;
@@ -58,12 +64,17 @@ int main() {
 
     char linha[2048];
     char *coluna[35];
+
     double maioremenda = 0.0;
     double emendaestado = 0.0;
     int contemendaestado = 0;
     int contparlemenda = 0;
     int lugarmaioreemenda = 0;
     int numeroLinha = 1;
+
+    int nordeste=0,norte=0,centroOeste=0,sudeste=0,sul=0;
+
+
 
 
     fgets(linha, sizeof(linha), arquivo);
@@ -79,7 +90,11 @@ int main() {
             token = strtok(NULL, ";\r\n");
         }
 
-        // Se a coluna 24 (Valor Pago) existe na linha lida, avalia
+      //PAREI AQ  if (i=10){
+      //      rankingestados(coluna[10]);
+      //  }
+
+        // verifica se eh o maior valor
         if (i > 24) {
             maiorValor(coluna[24], &maioremenda, &lugarmaioreemenda, numeroLinha);
         }
