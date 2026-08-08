@@ -13,8 +13,31 @@ coluna[24]=valor pago
 */
 ///////////////////////////////////////
 
-//void rankingEstados(const char *estado); VAI COMPARAR A COLUNA COM A STRING DE CADA ESTADO, SE FOR IGUAL, CONTADOR++;DECLARAR
-//O CONTADOR DE CADA ESTADO; DEPOIS FAZER O IF PARA VER SE TA NA REGIAO X E SOMAR
+void rankingEstados(const char *estado, int *no, int *ne, int *co, int *se, int *su){
+//STRCMP NAO TA DANDO 0; VOU TESTAR DEPOIS
+    if (strcmp("Norte", estado)== 0){
+            printf("a");
+        no++;
+    }
+    else if (strcmp("Nordeste", estado)== 0){
+        printf("av");
+        ne++;
+    }
+    else if (strcmp("Centro-Oeste", estado)== 0){
+        printf("ac");
+        co++;
+    }
+    else if (strcmp("Sudeste", estado)== 0){
+        printf("ad");
+        se++;
+    }
+    else if (strcmp("Sul", estado)== 0){
+        printf("ae");
+        su++;
+    }
+
+
+}
 
 
 
@@ -90,9 +113,9 @@ int main() {
             token = strtok(NULL, ";\r\n");
         }
 
-      //PAREI AQ  if (i=10){
-      //      rankingestados(coluna[10]);
-      //  }
+      if (i>10 && i<12){
+            rankingEstados(coluna[11], &norte, &nordeste, &centroOeste, &sudeste, &sul);
+      }
 
         // verifica se eh o maior valor
         if (i > 24) {
@@ -104,6 +127,7 @@ int main() {
 
     printf("Maior valor pago em emenda: R$ %.2f\n", maioremenda);
     printf("Linha no arquivo: %d\n", lugarmaioreemenda);
+    printf("Norte: %d, Nordeste: %d, Centro-Oeste: %d, Sudeste: %d, Sul: %d", norte, nordeste, centroOeste, sudeste, sul);
 
     return 0;
 }
