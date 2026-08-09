@@ -1,3 +1,4 @@
+//OBS LEMBRAR DE TROCAR PARA UTF 8
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>  // acentos
@@ -30,7 +31,7 @@ double *sc, double *se, double *sp, double *to) {
     else if (strcmp("ALAGOAS", estado) == 0) {
         *al += valor;
     }
-    else if (strcmp("AMAP¡", estado) == 0) {
+    else if (strcmp("AMAP√Å", estado) == 0) {
         *ap += valor;
     }
     else if (strcmp("AMAZONAS", estado) == 0) {
@@ -39,19 +40,19 @@ double *sc, double *se, double *sp, double *to) {
     else if (strcmp("BAHIA", estado) == 0) {
         *ba += valor;
     }
-    else if (strcmp("CEAR¡", estado) == 0) {
+    else if (strcmp("CEAR√Å", estado) == 0) {
         *ce += valor;
     }
     else if (strcmp("DISTRITO FEDERAL", estado) == 0) {
         *df += valor;
     }
-    else if (strcmp("ESPÕRITO SANTO", estado) == 0) {
+    else if (strcmp("ESP√çRITO SANTO", estado) == 0) {
         *es += valor;
     }
-    else if (strcmp("GOI¡S", estado) == 0) {
+    else if (strcmp("GOI√ÅS", estado) == 0) {
         *go += valor;
     }
-    else if (strcmp("MARANH√O", estado) == 0) {
+    else if (strcmp("MARANH√ÉO", estado) == 0) {
         *ma += valor;
     }
     else if (strcmp("MATO GROSSO", estado) == 0) {
@@ -63,19 +64,19 @@ double *sc, double *se, double *sp, double *to) {
     else if (strcmp("MINAS GERAIS", estado) == 0) {
         *mg += valor;
     }
-    else if (strcmp("PAR¡", estado) == 0) {
+    else if (strcmp("PAR√Å", estado) == 0) {
         *pa += valor;
     }
-    else if (strcmp("PARAÕBA", estado) == 0) {
+    else if (strcmp("PARA√çBA", estado) == 0) {
         *pb += valor;
     }
-    else if (strcmp("PARAN¡", estado) == 0) {
+    else if (strcmp("PARAN√Å", estado) == 0) {
         *pr += valor;
     }
     else if (strcmp("PERNAMBUCO", estado) == 0) {
         *pe += valor;
     }
-    else if (strcmp("PIAUÕ", estado) == 0) {
+    else if (strcmp("PIAU√ç", estado) == 0) {
         *pi += valor;
     }
     else if (strcmp("RIO DE JANEIRO", estado) == 0) {
@@ -87,7 +88,7 @@ double *sc, double *se, double *sp, double *to) {
     else if (strcmp("RIO GRANDE DO SUL", estado) == 0) {
         *rs += valor;
     }
-    else if (strcmp("ROND‘NIA", estado) == 0) {
+    else if (strcmp("ROND√îNIA", estado) == 0) {
         *ro += valor;
     }
     else if (strcmp("RORAIMA", estado) == 0) {
@@ -96,7 +97,7 @@ double *sc, double *se, double *sp, double *to) {
     else if (strcmp("SANTA CATARINA", estado) == 0) {
         *sc += valor;
     }
-    else if (strcmp("S√O PAULO", estado) == 0) {
+    else if (strcmp("S√ÉO PAULO", estado) == 0) {
         *sp += valor;
     }
     else if (strcmp("SERGIPE", estado) == 0) {
@@ -169,13 +170,13 @@ void imprimirTop5(double ac, double al, double am, double ap, double ba, double 
 
 
     EstadoRank ranking[27] = {
-        {"ACRE", ac}, {"ALAGOAS", al}, {"AMAZONAS", am}, {"AMAP¡", ap},
-        {"BAHIA", ba}, {"CEAR¡", ce}, {"DISTRITO FEDERAL", df}, {"ESPÕRITO SANTO", es},
-        {"GOI¡S", go}, {"MARANH√O", ma}, {"MINAS GERAIS", mg}, {"MATO GROSSO DO SUL", ms},
-        {"MATO GROSSO", mt}, {"PAR¡", pa}, {"PARAÕBA", pb}, {"PERNAMBUCO", pe},
-        {"PIAUÕ", pi}, {"PARAN¡", pr}, {"RIO DE JANEIRO", rj}, {"RIO GRANDE DO NORTE", rn},
-        {"ROND‘NIA", ro}, {"RORAIMA", rr}, {"RIO GRANDE DO SUL", rs}, {"SANTA CATARINA", sc},
-        {"SERGIPE", se}, {"S√O PAULO", sp}, {"TOCANTINS", to}
+        {"ACRE", ac}, {"ALAGOAS", al}, {"AMAZONAS", am}, {"AMAP√Å", ap},
+        {"BAHIA", ba}, {"CEAR√Å", ce}, {"DISTRITO FEDERAL", df}, {"ESP√çRITO SANTO", es},
+        {"GOI√ÅS", go}, {"MARANH√ÉO", ma}, {"MINAS GERAIS", mg}, {"MATO GROSSO DO SUL", ms},
+        {"MATO GROSSO", mt}, {"PAR√Å", pa}, {"PARA√çBA", pb}, {"PERNAMBUCO", pe},
+        {"PIAU√ç", pi}, {"PARAN√Å", pr}, {"RIO DE JANEIRO", rj}, {"RIO GRANDE DO NORTE", rn},
+        {"ROND√îNIA", ro}, {"RORAIMA", rr}, {"RIO GRANDE DO SUL", rs}, {"SANTA CATARINA", sc},
+        {"SERGIPE", se}, {"S√ÉO PAULO", sp}, {"TOCANTINS", to}
     };
 
     for (int i = 0; i < 27 - 1; i++) {
@@ -189,7 +190,7 @@ void imprimirTop5(double ac, double al, double am, double ap, double ba, double 
     }
     printf("\n================ TOP 5 ESTADOS =====================\n");
     for (int i = 0; i < 5; i++) {
-        printf("%d∫ Lugar: %-20s -> R$ %.2f\n", i + 1, ranking[i].nome, ranking[i].valor);
+        printf("%d¬∫ Lugar: %-20s -> R$ %.2f\n", i + 1, ranking[i].nome, ranking[i].valor);
     }
     printf("====================================================\n");
 }
@@ -248,6 +249,7 @@ int main() {
         printf("\n\n\n\n================ INFORMACOES GERAIS ================\n");
         printf("Alunos: Gabriel Marques Rodrigues da Silva; Joao Gabriel Almeida Barbosa; Joao Paulo de Oliveira Xavier\n");
         printf("Dados: Legislatura atual (2023-2026)\n");
+        printf("OBS: Valores arredondados para evitar os centavos na parte de valores");
         printf("====================================================\n");
         return 2;
     }
