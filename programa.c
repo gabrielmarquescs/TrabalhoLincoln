@@ -256,7 +256,7 @@ int main() {
     scanf("%d", &escolha);
     if (escolha==1){
         printf("\n================ MAIOR VALOR PAGO ==================\n");
-        printf("R$ %.2f\n", maioremenda);//printf("Linha no arquivo: %d\n", lugarmaioreemenda);
+        printf("R$ %.2f\n", maioremenda);printf("Linha no arquivo: %d\n", lugarmaioreemenda);
         printf("====================================================\n");
         contescolha++;
     }
